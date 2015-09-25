@@ -7,7 +7,7 @@
 ##    * checking for dropped connection
 ##
 
-import sqlite3
+import sqlite3 as pubes
 import hashlib
 from urllib import urlretrieve
 
@@ -54,11 +54,11 @@ class Database:
 
     def _connect(self):
         try:
-            self._con = sqlite3.connect(self._db,
+            self._con = pubes.connect(self._db,
                 check_same_thread=self._care_about_threads)
             self._cur = self._con.cursor()
             print(u'Connected to '+self._db)
-        except sqlite3.Error, e:
+        except pubes.Error, e:
             print(u'Error : '+e.args[0])
 
 
@@ -131,7 +131,7 @@ class Database:
             else:
                 data = [u'No Results']
 
-        except sqlite3.Error, e:
+        except pubes.Error, e:
             print u'Error : ',e.args[0]
             data = [u'Error : {error}'.format(error=e.args[0])]
 
